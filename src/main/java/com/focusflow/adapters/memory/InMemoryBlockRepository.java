@@ -7,11 +7,8 @@ import com.focusflow.domain.port.BlockRepository;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-<<<<<<< HEAD
 /* Simulates adapter in memory, but not useful at all */
 
-=======
->>>>>>> cba7fd92f7a79d089ff8f48b5f27bc8415d89e5c
 public class InMemoryBlockRepository implements BlockRepository {
     private final Map<UUID, TimeBlock> store = new ConcurrentHashMap<>();
 
