@@ -1,11 +1,2 @@
-create table time_blocks (
-  id uuid primary key,
-  user_id uuid not null,
-  title varchar(200) not null,
-  goal text,
-  status varchar(32) not null,
-  planned_minutes int not null check (planned_minutes > 0),
-  started_at timestamptz,
-  completed_at timestamptz,
-  created_at timestamptz default now() not null
-);
+create table time_block (duration_minutes integer not null, actual_end timestamp(6) with time zone, actual_start timestamp(6) with time zone, scheduled_end timestamp(6) with time zone, scheduled_start timestamp(6) with time zone, version bigint, id uuid not null, status varchar(16) not null check (status in ('SCHEDULED','RUNNING','COMPLETED','SKIPPED')), user_id varchar(64) not null, title varchar(200) not null, primary key (id));
+create index idx_time_block_user_status on time_block (user_id, status);
