@@ -1,10 +1,12 @@
 package com.focusflow.boot.web;
 
 import com.focusflow.application.BlockApplicationService;
+import com.focusflow.boot.web.dto.TimeBlockDto;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
+import java.util.*;;
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/blocks")
 public class BlockController {
@@ -12,6 +14,11 @@ public class BlockController {
 
     public BlockController(BlockApplicationService app) {
         this.app = app;
+    }
+
+    @GetMapping
+    public List<TimeBlockDto> listBlocks(@RequestParam String userId) {
+        return app.listBlocksForUser(userId);
     }
 
     @PostMapping
@@ -30,4 +37,10 @@ public class BlockController {
     public void complete(@PathVariable UUID id, @RequestParam String userId) {
         app.complete(id, userId);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteBlockForUser(@PathVariable UUID id) {
+        app.deleteBlockForUser(id);
+    }
+
 }

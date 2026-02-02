@@ -1,6 +1,7 @@
 package com.focusflow.adapters.jpa.mapper;
 
 import com.focusflow.adapters.jpa.entity.TimeBlockEntity;
+import com.focusflow.adapters.jpa.entity.TimeBlockEntity.Status;
 import com.focusflow.domain.model.TimeBlock;
 
 public final class TimeBlockMapper {
@@ -32,5 +33,15 @@ public final class TimeBlockMapper {
             e.getActualEnd(),
             TimeBlock.Status.valueOf(e.getStatus().name())
         );
+    }
+
+    public static void updateEntity(TimeBlockEntity e, TimeBlock d) {
+        e.setTitle(d.getTitle());
+        e.setDurationMinutes(d.getDurationMinutes());
+        e.setScheduledStart(d.getScheduledStart());
+        e.setScheduledEnd(d.getScheduledEnd());
+        e.setActualStart(d.getActualStart());
+        e.setActualEnd(d.getActualEnd());
+        e.setStatus(TimeBlockEntity.Status.valueOf(d.getStatus().name()));
     }
 }

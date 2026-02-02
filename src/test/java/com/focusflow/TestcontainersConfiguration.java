@@ -9,12 +9,12 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration(proxyBeanMethods = false)
-class TestcontainersConfiguration {
+public class TestcontainersConfiguration {
 
 	@Bean
 	@ServiceConnection
 	KafkaContainer kafkaContainer() {
-		return new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
+		return new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.0"));
 	}
 
 	@Bean
@@ -26,7 +26,8 @@ class TestcontainersConfiguration {
 	@Bean
 	@ServiceConnection(name = "redis")
 	GenericContainer<?> redisContainer() {
-		return new GenericContainer<>(DockerImageName.parse("redis:latest")).withExposedPorts(6379);
+		GenericContainer<?> container = new GenericContainer<>(DockerImageName.parse("redis:7-latest")).withExposedPorts(6379);
+		return container;
 	}
 
 }

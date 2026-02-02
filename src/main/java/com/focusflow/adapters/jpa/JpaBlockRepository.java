@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.Collections;
+
 import java.util.List;
 
 @Repository
@@ -29,6 +29,17 @@ public class JpaBlockRepository implements BlockRepository {
     }
 
     @Override
+    public void update(TimeBlock block) {
+        TimeBlockEntity entity = jpa.findById(block.getId())
+            .orElseThrow(() -> new IllegalStateException(
+                "TimeBlock not found: " + block.getId()
+            ));
+
+        TimeBlockMapper.updateEntity(entity, block);
+    }
+
+
+    @Override
     public Optional<TimeBlock> findById(UUID id){
         return jpa.findById(id).map(TimeBlockMapper::toDomain);
     }
@@ -37,6 +48,11 @@ public class JpaBlockRepository implements BlockRepository {
     public List<TimeBlock> findByUserId(String userId) {
         return jpa.findByUserId(userId).stream().map(TimeBlockMapper::toDomain)
         .collect(java.util.stream.Collectors.toList());
+    }
+
+    @Override
+    public void delete(TimeBlock block) {
+        jpa.deleteById(block.getId());
     }
 
 }
