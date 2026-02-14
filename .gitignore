@@ -52,4 +52,14 @@ Thumbs.db
 ### === Env / Credentials ===
 .env
 .env.*
-
+.properties
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.jks
+*.keystore
+*.truststore
+credentials/
+secrets/
