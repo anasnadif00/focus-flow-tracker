@@ -14,11 +14,11 @@ public class DataInitializer {
     public CommandLineRunner initTestUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             // Check if test user already exists
-            if (userRepository.findByUsername("testuser").isEmpty()) {
+            if (userRepository.findByUsername("testuser@magia3.it").isEmpty()) {
                 // Create test user with password "password"
-                User testUser = new User("testuser", passwordEncoder.encode("password"));
+                User testUser = new User("testuser@magia3.it", passwordEncoder.encode("password"));
                 userRepository.save(testUser);
-                System.out.println("✅ Test user created: username=testuser, password=password");
+                System.out.println("✅ Test user created: username=testuser@magia3.it, password=password");
             }
         };
     }
