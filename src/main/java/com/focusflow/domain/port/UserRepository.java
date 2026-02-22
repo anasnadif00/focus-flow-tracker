@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface UserRepository {
     Optional<User> findByUsername(String username);
+    Optional<User> findByClerkId(String clerkId);
     @NonNull User save(@NonNull User user);
     Optional<User> findById(@NonNull UUID id);
 }

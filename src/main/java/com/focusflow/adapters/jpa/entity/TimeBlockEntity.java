@@ -13,8 +13,8 @@ public class TimeBlockEntity {
     @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "user_id", nullable = false, length = 64)
-    private String userId;
+    @Column(name = "user_id", nullable = false, columnDefinition = "uuid")
+    private UUID userId;
 
     @Column(name = "title", nullable = false, length = 200)
     private String title;
@@ -48,8 +48,8 @@ public class TimeBlockEntity {
 
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
+    public UUID getUserId() { return userId; }
+    public void setUserId(UUID userId) { this.userId = userId; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
     public int getDurationMinutes() { return durationMinutes; }

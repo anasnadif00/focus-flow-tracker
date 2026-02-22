@@ -56,8 +56,11 @@ public class BlockApplicationService {
         return repo.findByUserId(userId).stream().map(TimeBlockDto::fromDomain).toList();
     }
 
-    public void deleteBlockForUser(UUID id) {
+    public void deleteBlockForUser(UUID id, String userId) {
         repo.findById(id).ifPresent(block -> {
+            if (!block.getUserId().equals(userId)) {
+                throw new IllegalArgumentException("Block does not belong to user");
+            }
             repo.delete(block);
         });
     }

@@ -46,7 +46,7 @@ public class JpaBlockRepository implements BlockRepository {
 
     @Override
     public List<TimeBlock> findByUserId(String userId) {
-        return jpa.findByUserId(userId).stream().map(TimeBlockMapper::toDomain)
+        return jpa.findByUserId(UUID.fromString(userId)).stream().map(TimeBlockMapper::toDomain)
         .collect(java.util.stream.Collectors.toList());
     }
 

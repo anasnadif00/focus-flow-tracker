@@ -11,10 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
+    private String clerkId;
+    
+    @Column(unique = true)
     private String username;
     
-    @Column(nullable = false)
+    @Column
     private String password;
     
     @Column(nullable = false)
@@ -22,6 +25,15 @@ public class User {
     
     protected User() {
         // JPA requires a no-arg constructor
+    }
+
+    // Static factory method for Clerk onboarding
+    public static User onboard(String clerkId, String username, String role) {
+        User user = new User();
+        user.clerkId = clerkId;
+        user.username = username;
+        user.role = role;
+        return user;
     }
     
     public User(String username, String password) {
@@ -38,6 +50,10 @@ public class User {
     
     public UUID getId() {
         return id;
+    }
+
+    public String getClerkId() {
+        return clerkId;
     }
     
     public String getUsername() {

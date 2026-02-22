@@ -4,13 +4,15 @@ import com.focusflow.adapters.jpa.entity.TimeBlockEntity;
 import com.focusflow.adapters.jpa.entity.TimeBlockEntity.Status;
 import com.focusflow.domain.model.TimeBlock;
 
+import java.util.UUID;
+
 public final class TimeBlockMapper {
     private TimeBlockMapper() {}
 
     public static TimeBlockEntity toEntity(TimeBlock d) {
         TimeBlockEntity e = new TimeBlockEntity();
         e.setId(d.getId());
-        e.setUserId(d.getUserId());
+        e.setUserId(UUID.fromString(d.getUserId()));
         e.setTitle(d.getTitle());
         e.setDurationMinutes(d.getDurationMinutes());
         e.setScheduledStart(d.getScheduledStart());
@@ -24,7 +26,7 @@ public final class TimeBlockMapper {
     public static TimeBlock toDomain(TimeBlockEntity e) {
         return TimeBlock.rehydrate(
             e.getId(),
-            e.getUserId(),
+            e.getUserId().toString(),
             e.getTitle(),
             e.getDurationMinutes(),
             e.getScheduledStart(),

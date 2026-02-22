@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface JpaTimeBlockRepository extends JpaRepository<TimeBlockEntity, UUID> {
-    List<TimeBlockEntity> findByUserId(String userId);
+    List<TimeBlockEntity> findByUserId(UUID userId);
 }
