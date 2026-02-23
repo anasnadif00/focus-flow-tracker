@@ -17,7 +17,7 @@ public class AuthController {
 
     public AuthController(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
+    } 
 
     // returns current user info, creates a local record if it's their first time
     @GetMapping("/me")
