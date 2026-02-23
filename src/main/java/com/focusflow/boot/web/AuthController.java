@@ -8,7 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-// handles user identity stuff - links Clerk auth to our local db
+// handles user identity stuff - links Clerk auth to our local db aa
 @RestController
 @RequestMapping("/api/user")
 public class AuthController {
