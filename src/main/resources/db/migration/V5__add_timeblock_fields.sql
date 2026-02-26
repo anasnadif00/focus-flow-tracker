@@ -1,0 +1,4 @@
+ALTER TABLE time_block
+ADD COLUMN category VARCHAR(50),
+ADD COLUMN break_count INT NOT NULL DEFAULT 0,
+ADD COLUMN break_duration INT NOT NULL DEFAULT 0;

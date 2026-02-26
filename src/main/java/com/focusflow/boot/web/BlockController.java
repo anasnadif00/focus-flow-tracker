@@ -38,10 +38,9 @@ public class BlockController {
 
     @PostMapping
     public UUID create(@AuthenticationPrincipal Jwt jwt,
-                       @RequestParam String title,
-                       @RequestParam int durationMinutes) {
+                       @RequestBody com.focusflow.boot.web.dto.CreateTimeBlockRequest request) {
         String userId = getLocalUserId(jwt);
-        return app.create(userId, title, durationMinutes);
+        return app.create(userId, request);
     }
 
     @PostMapping("/{id}/start")

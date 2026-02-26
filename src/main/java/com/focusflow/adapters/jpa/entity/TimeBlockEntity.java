@@ -22,6 +22,15 @@ public class TimeBlockEntity {
     @Column(name = "duration_minutes", nullable = false)
     private int durationMinutes;
 
+    @Column(name = "category", length = 50)
+    private String category;
+
+    @Column(name = "break_count", nullable = false)
+    private int breakCount = 0;
+
+    @Column(name = "break_duration", nullable = false)
+    private int breakDuration = 0;
+
     @Column(name = "scheduled_start")
     private Instant scheduledStart;
 
@@ -54,6 +63,16 @@ public class TimeBlockEntity {
     public void setTitle(String title) { this.title = title; }
     public int getDurationMinutes() { return durationMinutes; }
     public void setDurationMinutes(int durationMinutes) { this.durationMinutes = durationMinutes; }
+    
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    
+    public int getBreakCount() { return breakCount; }
+    public void setBreakCount(int breakCount) { this.breakCount = breakCount; }
+    
+    public int getBreakDuration() { return breakDuration; }
+    public void setBreakDuration(int breakDuration) { this.breakDuration = breakDuration; }
+
     public Instant getScheduledStart() { return scheduledStart; }
     public void setScheduledStart(Instant scheduledStart) { this.scheduledStart = scheduledStart; }
     public Instant getScheduledEnd() { return scheduledEnd; }

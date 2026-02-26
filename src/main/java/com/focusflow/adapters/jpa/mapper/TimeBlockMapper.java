@@ -15,6 +15,9 @@ public final class TimeBlockMapper {
         e.setUserId(UUID.fromString(d.getUserId()));
         e.setTitle(d.getTitle());
         e.setDurationMinutes(d.getDurationMinutes());
+        e.setCategory(d.getCategory());
+        e.setBreakCount(d.getBreakCount());
+        e.setBreakDuration(d.getBreakDuration());
         e.setScheduledStart(d.getScheduledStart());
         e.setScheduledEnd(d.getScheduledEnd());
         e.setActualStart(d.getActualStart());
@@ -29,6 +32,9 @@ public final class TimeBlockMapper {
             e.getUserId().toString(),
             e.getTitle(),
             e.getDurationMinutes(),
+            e.getCategory(),
+            e.getBreakCount(),
+            e.getBreakDuration(),
             e.getScheduledStart(),
             e.getScheduledEnd(),
             e.getActualStart(),
@@ -40,6 +46,9 @@ public final class TimeBlockMapper {
     public static void updateEntity(TimeBlockEntity e, TimeBlock d) {
         e.setTitle(d.getTitle());
         e.setDurationMinutes(d.getDurationMinutes());
+        e.setCategory(d.getCategory());
+        e.setBreakCount(d.getBreakCount());
+        e.setBreakDuration(d.getBreakDuration());
         e.setScheduledStart(d.getScheduledStart());
         e.setScheduledEnd(d.getScheduledEnd());
         e.setActualStart(d.getActualStart());

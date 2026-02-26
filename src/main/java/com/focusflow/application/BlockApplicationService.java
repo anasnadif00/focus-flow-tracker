@@ -28,8 +28,12 @@ public class BlockApplicationService {
         this.events = events;
     }
 
-    public UUID create(String userId, String title, int durationMinutes) {
-        TimeBlock block = new TimeBlock(UUID.randomUUID(), userId, title, durationMinutes);
+    public UUID create(String userId, com.focusflow.boot.web.dto.CreateTimeBlockRequest request) {
+        TimeBlock block = new TimeBlock(UUID.randomUUID(), userId, request.title(), request.durationMinutes());
+        block.setCategory(request.category());
+        block.setBreakCount(request.breakCount());
+        block.setBreakDuration(request.breakDuration());
+        block.setScheduledStart(request.scheduledStart());
         repo.save(block);
         return block.getId();
     }

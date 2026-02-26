@@ -9,6 +9,10 @@ public class TimeBlock {
     private final String title;
     private final int durationMinutes;
 
+    private String category;
+    private int breakCount;
+    private int breakDuration;
+
     private Instant scheduledStart;
     private Instant scheduledEnd;
     private Instant actualStart;
@@ -28,9 +32,13 @@ public class TimeBlock {
     }
 
     public static TimeBlock rehydrate(UUID id, String userId, String title, int durationMinutes,
+                                      String category, int breakCount, int breakDuration,
                                       Instant scheduledStart, Instant scheduledEnd,
                                       Instant actualStart, Instant actualEnd, Status status) {
         TimeBlock b = new TimeBlock(id, userId, title, durationMinutes);
+        b.category = category;
+        b.breakCount = breakCount;
+        b.breakDuration = breakDuration;
         b.scheduledStart = scheduledStart;
         b.scheduledEnd = scheduledEnd;
         b.actualStart = actualStart;
@@ -38,6 +46,12 @@ public class TimeBlock {
         b.status = status != null ? status : Status.SCHEDULED;
         return b;
     }
+
+    public void setCategory(String category) { this.category = category; }
+    public void setBreakCount(int breakCount) { this.breakCount = breakCount; }
+    public void setBreakDuration(int breakDuration) { this.breakDuration = breakDuration; }
+    public void setScheduledStart(Instant scheduledStart) { this.scheduledStart = scheduledStart; }
+    public void setScheduledEnd(Instant scheduledEnd) { this.scheduledEnd = scheduledEnd; }
 
     public void start() {
         if (status != Status.SCHEDULED) throw new IllegalStateException("Can only start from SCHEDULED");
@@ -61,6 +75,11 @@ public class TimeBlock {
     public String getUserId() { return userId; }
     public String getTitle() { return title; }
     public int getDurationMinutes() { return durationMinutes; }
+    
+    public String getCategory() { return category; }
+    public int getBreakCount() { return breakCount; }
+    public int getBreakDuration() { return breakDuration; }
+
     public Instant getScheduledStart() { return scheduledStart; }
     public Instant getScheduledEnd() { return scheduledEnd; }
     public Instant getActualStart() { return actualStart; }
