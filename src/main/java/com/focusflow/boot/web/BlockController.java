@@ -61,4 +61,23 @@ public class BlockController {
         String userId = getLocalUserId(jwt);
         app.deleteBlockForUser(id, userId);
     }
+
+    @GetMapping("/{id}")
+    public TimeBlockDto getBlock(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
+        String userId = getLocalUserId(jwt);
+        return app.findBlockById(id, userId);
+    }
+
+    @PostMapping("/{id}/skip")
+    public void skip(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
+        String userId = getLocalUserId(jwt);
+        app.skip(id, userId);
+    }
+
+    @PutMapping("/{id}")
+    public UUID update(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id,
+                       @RequestBody com.focusflow.boot.web.dto.CreateTimeBlockRequest request) {
+        String userId = getLocalUserId(jwt);
+        return app.update(id, userId, request);
+    }
 }

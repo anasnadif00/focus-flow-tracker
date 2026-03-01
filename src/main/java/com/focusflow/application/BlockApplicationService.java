@@ -68,4 +68,45 @@ public class BlockApplicationService {
             repo.delete(block);
         });
     }
+
+    public void skip(UUID id, String userId) {
+        TimeBlock block = repo.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Block not found: " + id));
+        if (!block.getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Block does not belong to user");
+        }
+        block.skip();
+        repo.update(block);
+        active.releaseLock(userId);
+    }
+
+    public TimeBlockDto findBlockById(UUID id, String userId) {
+        TimeBlock block = repo.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Block not found: " + id));
+        if (!block.getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Block does not belong to user");
+        }
+        return TimeBlockDto.fromDomain(block);
+    }
+
+    public UUID update(UUID id, String userId, com.focusflow.boot.web.dto.CreateTimeBlockRequest request) {
+        TimeBlock block = repo.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Block not found: " + id));
+        if (!block.getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Block does not belong to user");
+        }
+        if (block.getStatus() != TimeBlock.Status.SCHEDULED) {
+            throw new IllegalStateException("Can only update SCHEDULED blocks");
+        }
+        // Create a new block with updated fields, preserving the same ID and userId
+        TimeBlock updated = TimeBlock.rehydrate(
+            block.getId(), block.getUserId(),
+            request.title(), request.durationMinutes(),
+            request.category(), request.breakCount(), request.breakDuration(),
+            request.scheduledStart(), block.getScheduledEnd(),
+            null, null, TimeBlock.Status.SCHEDULED
+        );
+        repo.update(updated);
+        return id;
+    }
 }

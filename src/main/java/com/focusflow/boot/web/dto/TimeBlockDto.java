@@ -14,6 +14,9 @@ public record TimeBlockDto(
     int breakCount,
     int breakDuration,
     Instant scheduledStart,
+    Instant scheduledEnd,
+    Instant actualStart,
+    Instant actualEnd,
     Status status
 ){
     public static TimeBlockDto fromDomain(TimeBlock block) {
@@ -26,6 +29,9 @@ public record TimeBlockDto(
             block.getBreakCount(),
             block.getBreakDuration(),
             block.getScheduledStart(),
+            block.getScheduledEnd(),
+            block.getActualStart(),
+            block.getActualEnd(),
             block.getStatus()
         );
     }
